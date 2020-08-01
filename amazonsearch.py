@@ -5,7 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 import os
 
 def search(search):
-  AMAZON = "https://www.amazon.es/s?k={}"
+  AMAZON = "https://www.amazon.com/s?k={}"
   driver = webdriver.Remote(os.environ.get('BROWSER'), DesiredCapabilities.FIREFOX)
 
   search_term = '+'.join(search.split(' '))

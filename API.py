@@ -11,8 +11,7 @@ cors = CORS(app, resources={r"*": {"origins": os.environ.get('WEB')}})
 
 @app.route('/')
 def root():
-  params = loads(request.args.get('params', default = '', type = str))
-  return jsonify({ 'a': params['search'], 'b': 2 })
+  return jsonify({ 'a': 1, 'b': 2 })
 
 @app.route('/amazonsearch')
 def amazonsearch():
