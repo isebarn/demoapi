@@ -5,6 +5,7 @@ import os
 
 import amazonsearch as amazon
 import zillowsearch as zillow
+import DisonORM as dison
 
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -27,6 +28,17 @@ def zillow_zip_search():
   params = loads(request.args.get('params', default = '', type = str))
   search_term = params['search']
   result = zillow.zip_search(search_term)
-  print(result)
+
+  return jsonify(result)
+
+@app.route('/dison_books')
+def dison_books():
+  result = dison.Operations.GetBooks()
+
+  return jsonify(result)
+
+@app.route('/dison_ebookcategories')
+def dison_ebookcategories():
+  result = dison.Operations.GetEBookCategories()
 
   return jsonify(result)
