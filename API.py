@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS, cross_origin
 from json import loads
 import os
@@ -6,6 +6,7 @@ import os
 import amazonsearch as amazon
 import zillowsearch as zillow
 import DisonORM as dison
+import rightmove as rightmove
 
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -41,4 +42,22 @@ def dison_books():
 def dison_ebookcategories():
   result = dison.Operations.GetEBookCategories()
 
+  return jsonify(result)
+
+@app.route('/excelfile')
+def excelfile():
+  os.remove("/home/david/Downloads/file.xlsx")
+
+  #params = loads(request.args.get('params', default = '', type = str))
+  #start = params['start']
+  #end = params['end']
+  #turkey.get_data(start, end)
+  return send_from_directory('/home/david/Downloads' ,'data.xlsx', as_attachment=True)
+  #return send_from_directory('/home/selenium_chrome_downloads/' ,'FonTurkey_Fon_Karsilastirma.xlsx', as_attachment=True)
+
+@app.route('/rightmove')
+def rightmove():
+  params = loads(request.args.get('params', default = '', type = str))
+  search_term = params['search']
+  result = rightmove.search(search_term)
   return jsonify(result)
