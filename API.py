@@ -46,7 +46,6 @@ def dison_ebookcategories():
 
   return jsonify(result)
 
-<<<<<<< Updated upstream
 @app.route('/excelfile')
 def excelfile():
   os.remove("/home/david/Downloads/file.xlsx")
