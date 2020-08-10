@@ -7,6 +7,8 @@ import amazonsearch as amazon
 import zillowsearch as zillow
 import DisonORM as dison
 import rightmove as right
+import turkey
+from time import sleep
 
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -44,6 +46,7 @@ def dison_ebookcategories():
 
   return jsonify(result)
 
+<<<<<<< Updated upstream
 @app.route('/excelfile')
 def excelfile():
   os.remove("/home/david/Downloads/file.xlsx")
@@ -62,3 +65,27 @@ def rightmove():
   print(search_term)
   result = right.search(search_term)
   return jsonify(result)
+
+@app.route('/generate_excel')
+def generate_excel():
+  try:
+    os.remove("/home/selenium_chrome_downloads/FonTurkey_Fon_Karsilastirma.xlsx")
+
+  except Exception as e:
+    pass
+
+  try:
+    params = loads(request.args.get('params', default = '', type = str))
+    start = params['start']
+    end = params['end']
+    turkey.get_data(start, end)
+
+  except Exception as e:
+    pass
+
+  return '1'
+
+
+@app.route('/get_excel')
+def get_excel():
+  return send_from_directory('/home/selenium_chrome_downloads/' ,'FonTurkey_Fon_Karsilastirma.xlsx', as_attachment=True)
