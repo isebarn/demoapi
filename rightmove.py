@@ -8,7 +8,6 @@ import re
 
 def search(location):
   url = 'https://www.rightmove.co.uk/property-for-sale/search.html?searchLocation={}&locationIdentifier=&useLocationIdentifier=false&buy=For+sale'
-  location = 'London'
   driver = webdriver.Remote(os.environ.get('BROWSER'), DesiredCapabilities.FIREFOX)
   driver.get(url.format(location))
   submit_btn = driver.find_element_by_xpath("//button[@id='submit']").click()

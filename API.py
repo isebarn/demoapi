@@ -6,7 +6,7 @@ import os
 import amazonsearch as amazon
 import zillowsearch as zillow
 import DisonORM as dison
-import rightmove as rightmove
+import rightmove as right
 
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -59,5 +59,6 @@ def excelfile():
 def rightmove():
   params = loads(request.args.get('params', default = '', type = str))
   search_term = params['search']
-  result = rightmove.search(search_term)
+  print(search_term)
+  result = right.search(search_term)
   return jsonify(result)
